@@ -1,0 +1,18 @@
+{
+  "task_description": "Проведи глубокое исследование файла `data/ecommerce_transactions.csv`:\n1. Проверь данные на пропуски (NaN). Если они есть в колонках Age или Purchase_Amount, заполни их медианными значениями.\n2. Разбей пользователей на 3 возрастные группы (Группы: 'Молодежь' [0-30], 'Средний возраст' [31-55], 'Пожилые' [56-100]).\n3. Посчитай средний чек (Purchase_Amount) для каждой группы и выведи на экран.\n4. Построй графики плотности распределения трат (KDE plot или гистограмму) для этих трех групп с помощью matplotlib/seaborn. Поскольку графического интерфейса нет, ОБЯЗАТЕЛЬНО сохрани этот график в файл `data/outputs/age_spending_distribution.png`. Выведи текстовые отчеты через print.",
+  "steps": [
+    {
+      "step_number": 1,
+      "action": {
+        "thought": "Анализ реального Kaggle-датасета транзакций.",
+        "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Загрузка данных\ndf = pd.read_csv('data/ecommerce_transactions.csv')\n\n# Проверка данных на пропуски\nprint('Пропуски в Age: ', df['Age'].isnull().sum())\nprint('Пропуски в Purchase_Amount: ', df['Purchase_Amount'].isnull().sum())\n\n# Заполнение пропусков медианными значениями\ndf['Age'] = df['Age'].fillna(df['Age'].median())\ndf['Purchase_Amount'] = df['Purchase_Amount'].fillna(df['Purchase_Amount'].median())\n\n# Разбивка на возрастные группы\nage_bins = [0, 30, 55, 100]\nage_labels = ['Молодежь', 'Средний возраст', 'Пожилые']\ndf['Age_Group'] = pd.cut(df['Age'], bins=age_bins, labels=age_labels, right=False)\n\n# Посчитать средний чек для каждой группы\naverage_spending = df.groupby('Age_Group')['Purchase_Amount'].mean().reset_index()\nprint('Средний чек для каждой группы:')\nprint(average_spending)\n\n# Построение графиков\nsns.kdeplot(data=df, x='Purchase_Amount', hue='Age_Group', alpha=0.7, legend=True)\nplt.xlabel('Средний чек')\nplt.ylabel('Количество')\nplt.title('Плотность распределения трат по возрастным группам')\nplt.savefig('data/outputs/age_spending_distribution.png', bbox_inches='tight')\nplt.close()"
+      },
+      "observation": {
+        "stdout": "Пропуски в Age:  0\nПропуски в Purchase_Amount:  0\nСредний чек для каждой группы:\n         Age_Group  Purchase_Amount\n0         Молодежь       505.185154\n1  Средний возраст       502.687074\n2          Пожилые       502.388707\n",
+        "stderr": "",
+        "exit_code": 0
+      }
+    }
+  ],
+  "is_success": true
+}

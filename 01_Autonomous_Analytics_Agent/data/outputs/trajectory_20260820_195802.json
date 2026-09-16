@@ -1,0 +1,18 @@
+{
+  "task_description": "Проведи глубокое исследование файла `data/ecommerce_transactions.csv`:\n1. Проверь данные на пропуски (NaN). Если они есть в колонках Age или Purchase_Amount, заполни их медианными значениями.\n2. Разбей пользователей на 3 возрастные группы (Группы: 'Молодежь' [0-30], 'Средний возраст' [31-55], 'Пожилые' [56-100]).\n3. Посчитай средний чек (Purchase_Amount) для каждой группы и выведи на экран.\n4. Построй графики плотности распределения трат (KDE plot или гистограмму) для этих трех групп с помощью matplotlib/seaborn. Поскольку графического интерфейса нет, ОБЯЗАТЕЛЬНО сохрани этот график в файл `data/outputs/age_spending_distribution.png`. Выведи текстовые отчеты через print.",
+  "steps": [
+    {
+      "step_number": 1,
+      "action": {
+        "thought": "Анализ реального Kaggle-датасета транзакций.",
+        "code": "import pandas as pd\nimport matplotlib.pyplot as plt\nimport seaborn as sns\n\n# Загрузка данных\ndf = pd.read_csv('data/ecommerce_transactions.csv')\n\n# Проверка на пропуски в колонках Age и Purchase_Amount\nif df['Age'].isnull().sum() > 0:\n    df['Age'] = df['Age'].fillna(df['Age'].median())\nif df['Purchase_Amount'].isnull().sum() > 0:\n    df['Purchase_Amount'] = df['Purchase_Amount'].fillna(df['Purchase_Amount'].median())\n\n# Разбивка на три возрастные группы\ndf['Age_Group'] = pd.cut(df['Age'], bins=[0, 30, 55, 100], labels=['Молодежь', 'Средний возраст', 'Пожилые'])\n\n# Построение графиков плотности распределения трат для каждой группы\nplt.figure(figsize=(10, 6))\nsns.histplot(data=df, x='Purchase_Amount', hue='Age_Group', bins=30, alpha=0.7)\nplt.title('Графики плотности распределения трат для разных возрастных групп')\nplt.xlabel('Средний чек')\nplt.ylabel('Количество транзакций')\nplt.savefig('data/outputs/age_spending_distribution.png', bbox_inches='tight')\nplt.close()\n\n# Вычисление среднего чека для каждой группы\nmean_spending_by_group = df.groupby('Age_Group')['Purchase_Amount'].mean()\nprint('Средний чек для каждой группы:')\nfor group, mean in mean_spending_by_group.items():\n    print(f'{group}: ${mean:.2f}')"
+      },
+      "observation": {
+        "stdout": "Средний чек для каждой группы:\nМолодежь: $503.65\nСредний возраст: $503.17\nПожилые: $502.71\n",
+        "stderr": "",
+        "exit_code": 0
+      }
+    }
+  ],
+  "is_success": true
+}
