@@ -15,7 +15,7 @@ This project focuses on secure infrastructure design and implements a structured
 - **Deterministic Reflexion Loop:** Implemented using LangGraph conditional edges. The supervisor node intercepts runtime tracebacks and `SyntaxError`/`NameError` logs, atomizes them, increments retry metrics, and feeds the error context back to the Planner node for dynamic self-healing.
 - **SFT-Ready ADP Pipeline:** The session history is packaged into immutable, unique Pydantic-validated JSON trajectories tagged with timestamps (`trajectory_YYYYMMDD_HHMMSS.json`). This structure complies with the Agent Data Protocol standards, making logs instantly compatible with tools like **LLaMA-Factory** for downstream model alignment via LoRA/QLoRA.
   
-  *Reference Protocol Guidelines:* For detailed specifications on trajectory data structures, see the official [Agent Data Protocol Documentation](https://agentprotocol.ai).
+  *Reference Protocol Guidelines:* For detailed specifications on trajectory data structures, see the official [Agent Data Protocol Documentation](future-link).
 
 ---
 
