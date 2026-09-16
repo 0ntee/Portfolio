@@ -1,10 +1,10 @@
-# ADP-Graph: Autonomous Analytics Agent with Linux-Isolated Runtime & Reflexion Loop
+# ADP-Graph: An architecture-focused sandbox prototype of an autonomous AI Agent
 
 An architecture-focused sandbox prototype of an autonomous AI Agent designed to solve data analytics and exploratory data analysis (EDA) tasks. Built on top of **LangGraph** and **Llama.cpp**, the system generates Python code, saves it to physical files, and safely executes it inside a sandboxed environment.
 
 This project focuses on secure infrastructure design and implements a structured logging contract inspired by the **Agent Data Protocol (ADP)** specifications for LLM trajectory alignment, featuring a deterministic self-correction (Reflexion) feedback loop.
 
-> **Project Context & Disclaimer:** This repository represents a personal R&D and learning experiment. It is not a commercial enterprise-grade product. The primary goal was to explore LLM-code generation, multi-agent graph mechanics, and secure runtime isolation.
+> **Project Context & Disclaimer:** This repository represents a personal R&D and learning experiment. It is not a commercial enterprise-grade product. The primary goal was to explore LLM-guided code generation, multi-agent graph mechanics, and secure runtime isolation
 
 ---
 
@@ -14,6 +14,7 @@ This project focuses on secure infrastructure design and implements a structured
 - **Zero-Trust Network Cutoff (`unshare -n`):** To prevent LLM code hallucinations from leaking environment variables, API tokens, or keys to third-party servers, the execution process is wrapped in native **Linux Network Namespaces** via `unshare -n`. The code runs with absolute hardware-level network isolation without requiring `sudo` privileges.
 - **Deterministic Reflexion Loop:** Implemented using LangGraph conditional edges. The supervisor node intercepts runtime tracebacks and `SyntaxError`/`NameError` logs, atomizes them, increments retry metrics, and feeds the error context back to the Planner node for dynamic self-healing.
 - **SFT-Ready ADP Pipeline:** The session history is packaged into immutable, unique Pydantic-validated JSON trajectories tagged with timestamps (`trajectory_YYYYMMDD_HHMMSS.json`). This structure complies with the Agent Data Protocol standards, making logs instantly compatible with tools like **LLaMA-Factory** for downstream model alignment via LoRA/QLoRA.
+- **Theoretical Alignment with Cutting-Edge Security Research:** The sandbox architecture and the decouple-and-verify design patterns implemented in this runtime directly align with the defensive concepts outlined in recent AI Agent security studies, specifically the Verify-Before-Commit paradigm. For more academic context on defending against tool-stream context hijacking, refer to the paper: VIGIL: Defending LLM Agents Against Tool Stream Injection via Verify-Before-Commit (arXiv:2601.05755).
   
   *Reference Protocol Guidelines:* For detailed specifications on trajectory data structures, see the official [Agent Data Protocol Documentation](future-link).
 
