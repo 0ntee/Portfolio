@@ -1,8 +1,10 @@
-# ADP-Graph: Autonomous Analytics Agent with Linux-Isolated Runtime & Reflexion
+# ADP-Graph: Autonomous Analytics Agent with Linux-Isolated Runtime & Reflexion Loop
 
-An advanced, production-grade autonomous AI Agent designed to solve complex data analytics and exploratory data analysis (EDA) tasks. Built on top of **LangGraph** and **Llama.cpp**, the system generates clean Python code, saves it to physical files, and safely executes it inside a sandboxed environment.
+An architecture-focused sandbox prototype of an autonomous AI Agent designed to solve data analytics and exploratory data analysis (EDA) tasks. Built on top of **LangGraph** and **Llama.cpp**, the system generates Python code, saves it to physical files, and safely executes it inside a sandboxed environment.
 
-This project implements a structured logging contract inspired by the **Agent Data Protocol (ADP)** and features a deterministic self-correction (Reflexion) feedback loop.
+This project focuses on secure infrastructure design and implements a structured logging contract inspired by the **Agent Data Protocol (ADP)** specifications for LLM trajectory alignment, featuring a deterministic self-correction (Reflexion) feedback loop.
+
+> **Project Context & Disclaimer:** This repository represents a personal R&D and learning experiment. It is not a commercial enterprise-grade product. The primary goal was to explore LLM-code generation, multi-agent graph mechanics, and secure runtime isolation.
 
 ---
 
@@ -11,7 +13,9 @@ This project implements a structured logging contract inspired by the **Agent Da
 - **File-Based Execution & Subprocess Isolation:** Unlike insecure systems using internal `exec()`, this engine writes the agent's code to disk (`data/agent_scripts/step_X.py`) and executes it as an independent operating system process via `subprocess.run`.
 - **Zero-Trust Network Cutoff (`unshare -n`):** To prevent LLM code hallucinations from leaking environment variables, API tokens, or keys to third-party servers, the execution process is wrapped in native **Linux Network Namespaces** via `unshare -n`. The code runs with absolute hardware-level network isolation without requiring `sudo` privileges.
 - **Deterministic Reflexion Loop:** Implemented using LangGraph conditional edges. The supervisor node intercepts runtime tracebacks and `SyntaxError`/`NameError` logs, atomizes them, increments retry metrics, and feeds the error context back to the Planner node for dynamic self-healing.
-- **SFT-Ready ADP Pipeline:** The session history is packaged into immutable, unique Pydantic-validated JSON trajectories tagged with timestamps (`trajectory_YYYYMMDD_HHMMSS.json`). This structure avoids raw log parsing, making logs instantly compatible with tools like **LLaMA-Factory** for training downstream models via LoRA/QLoRA.
+- **SFT-Ready ADP Pipeline:** The session history is packaged into immutable, unique Pydantic-validated JSON trajectories tagged with timestamps (`trajectory_YYYYMMDD_HHMMSS.json`). This structure complies with the Agent Data Protocol standards, making logs instantly compatible with tools like **LLaMA-Factory** for downstream model alignment via LoRA/QLoRA.
+  
+  *Reference Protocol Guidelines:* For detailed specifications on trajectory data structures, see the official [Agent Data Protocol Documentation](https://agentprotocol.ai).
 
 ---
 
@@ -71,5 +75,5 @@ Name: Purchase_Amount, dtype: float64
 
 ## Environment & Resource Allocation
 
-- **LLM Engine:** Local inference via `llama-cpp-python`, binding a quantized `Qwen2.5-Coder-1.5B-Instruct-Q4_K_M.gguf` [1.8]. Concurrency is strictly resource-constrained via `n_threads=1` to guarantee host process lock stability in cluster/shared environments [1.8].
-- **Data Sandbox:** Native compliance with **Pandas 3.0** semantics [1.1]. Execution boundaries enforce proper image rendering via `matplotlib.pyplot.savefig()` and explicit state cleanup via `.close()` to optimize OS file descriptors memory footprint.
+- **LLM Engine:** Local inference via `llama-cpp-python`, binding a quantized `Qwen2.5-Coder-1.5B-Instruct-Q4_K_M.gguf`. Concurrency is strictly resource-constrained via `n_threads=1` to guarantee host process lock stability in cluster/shared environments.
+- **Data Sandbox:** Native compliance with **Pandas 3.0** semantics. Execution boundaries enforce proper image rendering via `matplotlib.pyplot.savefig()` and explicit state cleanup via `.close()` to optimize OS file descriptors memory footprint.
