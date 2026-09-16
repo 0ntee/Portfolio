@@ -1,2 +1,2 @@
-# learning-and-courses
+# Portfolio
 My study and pet projects
