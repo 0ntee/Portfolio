@@ -9,23 +9,20 @@ def create_synthetic_data():
     dates = pd.date_range(start="2026-01-01", end="2026-03-01", freq="h")
     n_rows = len(dates)
     
-    amounts = np.random.exponential(scale=500, size=n_rows) + 100
+    purchase_amounts = np.random.exponential(scale=500, size=n_rows) + 100
+    ages = np.random.randint(18, 75, size=n_rows)
     
     df = pd.DataFrame({
         "timestamp": dates,
-        "transaction_id": [f"TX_{i:06d}" for i in range(n_rows)],
-        "amount": np.round(amounts, 2),
+        "transaction_id": np.char.add("TX_", np.char.zfill(np.arange(n_rows).astype(str), 6)),
+        "Age": ages,
+        "Purchase_Amount": np.round(purchase_amounts, 2),
         "category": np.random.choice(["Супермаркеты", "Кафе", "Транспорт", "Аптеки", "АЗС"], size=n_rows)
     })
     
-    friday_mask = df["timestamp"].dt.day_name() == "Friday"
-    friday_indices = df[friday_mask].index
-    
-    anomaly_indices = np.random.choice(friday_indices, size=15, replace=False)
-    df.loc[anomaly_indices, "amount"] = np.round(np.random.uniform(50000, 150000, size=15), 2)
-    
-    df.to_csv("data/ecommerce_transactions.csv", index=False)
-    print("Файл data/ecommerce_transactions.csv успешно сгенерирован! Найдено пятничных аномалий:", len(anomaly_indices))
+    output_path = "data/ecommerce_transactions.csv"
+    df.to_csv(output_path, index=False)
+    print(f"Файл {output_path} успешно сгенерирован для анализа агентом!")
 
 if __name__ == "__main__":
     create_synthetic_data()
