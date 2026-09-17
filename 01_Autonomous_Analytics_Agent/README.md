@@ -16,7 +16,7 @@ This project focuses on secure infrastructure design and implements a structured
 - **SFT-Ready ADP Pipeline:** The session history is packaged into immutable, unique Pydantic-validated JSON trajectories tagged with timestamps (`trajectory_YYYYMMDD_HHMMSS.json`). This structure complies with the Agent Data Protocol standards, making logs instantly compatible with tools like **LLaMA-Factory** for downstream model alignment via LoRA/QLoRA.
 - **Theoretical Alignment with Cutting-Edge Security Research:** The sandbox architecture and the decouple-and-verify design patterns implemented in this runtime directly align with the defensive concepts outlined in recent AI Agent security studies, specifically the Verify-Before-Commit paradigm. For more academic context on defending against tool-stream context hijacking, refer to the paper: VIGIL: Defending LLM Agents Against Tool Stream Injection via Verify-Before-Commit (arXiv:2601.05755).
   
-  *Reference Protocol Guidelines:* For detailed specifications on trajectory data structures, see the official [Agent Data Protocol Documentation](future-link).
+  *Reference Protocol Guidelines:* For detailed specifications on trajectory data structures, see the official [Agent Data Protocol Documentation](https://proceedings.iclr.cc/paper_files/paper/2026/file/e79c09f39aca8507f527daad3601b3aa-Paper-Conference.pdf).
 
 ---
 
