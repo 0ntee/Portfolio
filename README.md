@@ -1,12 +1,12 @@
 ### Data Analytics & Machine Learning Portfolio
 
-Welcome to my portfolio repository! Here, I showcase my production-focused projects in data analysis, automated AI agents, and deep learning engineering. My work emphasizes clean architecture, low-level efficiency, and rigorous mathematical grounding. 
+Welcome to my portfolio repository! This space showcases a collection of production-inspired projects focused on automated analytics infrastructure, exploratory data analysis (EDA), and deep learning engineering. My work emphasizes clean architecture, explicit hardware resource optimization, and mathematical grounding. 
 
 ### About Me
 
-* **Role:** Junior Data Analyst / ML Specialist
-* **Education:** Data Science Track at **School 21 (by Sber)** | Technical background from **RUT (MIIT)**
-* **Core Philosophy:** I look under the hood. Whether it is benchmarking raw matrix operations or sandboxing generative code execution, I focus on system safety, explicit resource optimization, and actionable data-driven insights.
+* **Role:** Junior Data Analyst / ML Engineering Specialist
+* **Location:** Moscow, Russia
+* **Core Philosophy:** I look under the hood. Whether it is benchmarking raw matrix operations, building isolated Python sandboxes, or rendering CLI statistical charts, I focus on system safety, zero-dependency efficiency, and actionable data-driven insights.
 
 ### Tech Stack Matrix
 
@@ -22,25 +22,25 @@ Matplotlib, Seaborn, Custom ASCII-driven CLI logging engines
 
 ### Repository Navigation (Projects)
 
-Here is a structured overview of the projects included in this portfolio. Click on the project name to view its dedicated, detailed documentation and codebase. 
+Here is a structured overview of the independent projects included in this portfolio. Click on a project name to view its dedicated documentation and codebase. 
 
 ### [📁 01_Autonomous_Analytics_Agent](./01_Autonomous_Analytics_Agent)
 
 * **Domain:** Automated Analytics & GenAI Infrastructure
 * **Core Stack:** Python, LangGraph, Llama.cpp, Pydantic, Linux Namespaces (unshare -n)
-* **Value Proposition:** An architecture-focused sandbox prototype of an autonomous AI Agent that solves exploratory data analysis (EDA) tasks. Features a zero-trust network cutoff, a deterministic Reflexion self-healing feedback loop, and produces SFT-ready trajectory datasets adhering to the international **Agent Data Protocol (ADP)**.
+* **Overview:** An architecture-focused sandbox prototype of an autonomous AI Agent that solves exploratory data analysis (EDA) tasks. Features a zero-trust network cutoff, a deterministic Reflexion self-healing feedback loop, and produces SFT-ready trajectory datasets adhering to the international **Agent Data Protocol (ADP)**.
 
 ### [📁 02_Movie_analysis](./02_Movie_analysis)
 
 * **Domain:** Exploratory Data Analysis (EDA) & CLI Engineering
 * **Core Stack:** Python, Jupyter Notebook, Requests, BeautifulSoup 4, Pytest
-* **Value Proposition:** End-to-end data pipeline processing thousands of movie reviews, tags, and ratings from the MovieLens dataset. Includes custom web-scraping components and features a zero-dependency **ASCII-driven CLI charting engine** to output statistical distributions directly inside headless server logs.
+* **Overview:** End-to-end data pipeline processing thousands of movie reviews, tags, and ratings from the open MovieLens dataset. Includes custom web-scraping components and features a zero-dependency **ASCII-driven CLI charting engine** to output statistical distributions directly inside headless server logs.
 
-### [📁 03_DL_Framework_From_Scratch](./03_DL_Framework_From_Scratch) *(Create this folder if named differently)*
+### [📁 03_DL_Framework_From_Scratch](./03_DL_Framework_From_Scratch)
 
 * **Domain:** Deep Learning & Mathematical Prototyping
 * **Core Stack:** Pure Python, Vectorized NumPy
-* **Value Proposition:** A modular, production-inspired implementation of deep learning core primitives (Dense layers, ReLU activation, and MSELoss). It features a purely vectorized backpropagation algorithm using matrix calculus and implements explicit cache memory management to prevent memory leaks during long-running training loops.
+* **Overview:** A modular implementation of deep learning core primitives (Dense layers, ReLU activation, and MSELoss). It features a purely vectorized backpropagation algorithm using matrix calculus and implements explicit cache memory management to prevent memory leaks during long-running training loops.
 
 ### Getting Started
 
