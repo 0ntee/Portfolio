@@ -25,7 +25,7 @@ def create_synthetic_data():
     df.loc[anomaly_indices, "amount"] = np.round(np.random.uniform(50000, 150000, size=15), 2)
     
     df.to_csv("data/ecommerce_transactions.csv", index=False)
-    print("Файл data/transactions.csv успешно сгенерирован! Найдено пятничных аномалий:", len(anomaly_indices))
+    print("Файл data/ecommerce_transactions.csv успешно сгенерирован! Найдено пятничных аномалий:", len(anomaly_indices))
 
 if __name__ == "__main__":
     create_synthetic_data()
