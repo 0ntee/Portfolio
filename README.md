@@ -50,14 +50,11 @@ To review the code execution locally: 
 
 1. Clone the parent repository: 
 
-bash
-
 git clone https://github.com/0ntee/Portfolio.git
 
-Используйте код с осторожностью.
 2. Navigate to the project of your interest and follow its step-by-step setup guides.
 
-### 📬 Contact Information
+### Contact Information
 
 * **Telegram:** [@On_tea](https://t.me/On_tea)
 * **Email:** unded32@gmail.com
